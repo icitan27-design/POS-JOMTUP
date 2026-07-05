@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-100;
+}
+
+/* ---------- สไตล์สำหรับพิมพ์ใบเสร็จ ---------- */
+@media print {
+  /* ซ่อนทุกอย่างยกเว้นใบเสร็จ */
+  body * { visibility: hidden; }
+  #receipt, #receipt * { visibility: visible; }
+  #receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+  .no-print { display: none !important; }
+  @page { margin: 5mm; }
+
+  /* พิมพ์ QR โต๊ะ */
+  .qr-card { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ccc !important; }
+}
+
+/* scrollbar สวยงาม */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-300 dark:bg-slate-600; }
+::-webkit-scrollbar-track { background: transparent; }
